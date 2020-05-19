@@ -1,6 +1,8 @@
 DROP DATABASE IF EXISTS recipes_app_db;
 CREATE DATABASE recipes_app_db;
 USE recipes_app_db;
+
+
 -- CREATE TABLE users (
 --   user_id INT NOT NULL auto_increment primary key,
 --   name varchar (50),

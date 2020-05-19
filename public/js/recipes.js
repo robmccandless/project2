@@ -88,8 +88,10 @@ $(document).ready(function() {
         var newRecipeCardBody = $("<div>");
         newRecipeCardBody.addClass("card-body");
         var newRecipeBody = $("<p>");
+        var newRecipeCook = $("<p>");
         newRecipeTitle.text(recipe.title + " ");
         newRecipeBody.text(recipe.body);
+        newRecipeCook.text(recipe.cookTime);
         newRecipeDate.text(formattedDate);
         newRecipeTitle.append(newRecipeDate);
         newRecipeCardHeading.append(deleteBtn);
@@ -97,6 +99,7 @@ $(document).ready(function() {
         newRecipeCardHeading.append(newRecipeTitle);
         newRecipeCardHeading.append(newRecipeChef);
         newRecipeCardBody.append(newRecipeBody);
+        newRecipeCardBody.append(newRecipeCook);
         newRecipeCard.append(newRecipeCardHeading);
         newRecipeCard.append(newRecipeCardBody);
         newRecipeCard.data("recipe", recipe);
