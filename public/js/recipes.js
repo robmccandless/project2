@@ -76,6 +76,10 @@ $(document).ready(function() {
         var editBtn = $("<button>");
         editBtn.text("EDIT");
         editBtn.addClass("edit btn btn-info");
+        // var upVoteBtn = $("<button>");
+        // upVoteBtn.text("Thumbs Up Vote");
+        // upVoteBtn.addClass("upvote");
+        // $('#title').upvote();
         var newRecipeTitle = $("<h2>");
         var newRecipeDate = $("<small>");
         var newRecipeChef = $("<h5>");
