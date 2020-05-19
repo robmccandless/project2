@@ -28,7 +28,7 @@ $(document).ready(function() {
 
     // A function for creating an Chef. Calls getChefs upon completion
     function upsertChef(chefData) {
-        $.post("/api/chefs", chefData)
+        $.post("/api/chef", chefData)
             .then(getChefs);
     }
 
@@ -50,7 +50,7 @@ $(document).ready(function() {
 
     // Function for retrieving Chefs and getting them ready to be rendered to the page
     function getChefs() {
-        $.get("/api/chefs", function(data) {
+        $.get("/api/chef", function(data) {
             var rowsToAdd = [];
             for (var i = 0; i < data.length; i++) {
                 rowsToAdd.push(createChefRow(data[i]));
@@ -86,7 +86,7 @@ $(document).ready(function() {
         var id = listItemData.id;
         $.ajax({
                 method: "DELETE",
-                url: "/api/chefs/" + id
+                url: "/api/chef/" + id
             })
             .then(getChefs);
     }

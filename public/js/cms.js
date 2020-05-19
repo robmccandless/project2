@@ -2,6 +2,7 @@ $(document).ready(function() {
     // Getting jQuery references to the recipe body, title, form, and Chef select
     var bodyInput = $("#body");
     var titleInput = $("#title");
+    var cookInput = $("#cookTime");
     var cmsForm = $("#cms");
     var chefSelect = $("#chef");
     // Adding an event listener for when the form is submitted
@@ -42,6 +43,9 @@ $(document).ready(function() {
             body: bodyInput
                 .val()
                 .trim(),
+            cookTime: cookInput
+                .val()
+                .trim(),
             chefId: chefSelect.val()
         };
 
@@ -70,7 +74,7 @@ $(document).ready(function() {
                 queryUrl = "/api/recipes/" + id;
                 break;
             case "chef":
-                queryUrl = "/api/chefs/" + id;
+                queryUrl = "/api/chef/" + id;
                 break;
             default:
                 return;
@@ -81,6 +85,7 @@ $(document).ready(function() {
                 // If this recipe exists, prefill our cms forms with its data
                 titleInput.val(data.title);
                 bodyInput.val(data.body);
+                cookInput.val(data.cookTime);
                 chefId = data.ChefId || data.id;
                 // If we have a recipe with this id, set a flag for us to know to update the recipe
                 // when we hit submit
@@ -91,13 +96,13 @@ $(document).ready(function() {
 
     // A function to get Chefs and then render our list of Chefs
     function getChefs() {
-        $.get("/api/chefs", renderChefList);
+        $.get("/api/chef", renderChefList);
     }
     // Function to either render a list of Chefs, or if there are none, direct the user to the page
     // to create an Chef first
     function renderChefList(data) {
         if (!data.length) {
-            window.location.href = "/chefs";
+            window.location.href = "/chef";
         }
         $(".hidden").removeClass("hidden");
         var rowsToAdd = [];

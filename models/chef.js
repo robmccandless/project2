@@ -1,7 +1,7 @@
 module.exports = function(sequelize, DataTypes) {
     var Chef = sequelize.define("Chef", {
         // Giving the Chef model a name of type STRING
-        Name: DataTypes.STRING,
+        name: DataTypes.STRING,
         email: DataTypes.STRING,
 
     });
