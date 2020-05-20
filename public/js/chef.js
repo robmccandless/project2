@@ -42,7 +42,7 @@ $(document).ready(function() {
         } else {
             newTr.append("<td>0</td>");
         }
-        newTr.append("<td><a href='/blog?chef_id=" + chefData.id + "'>Go to Recipes</a></td>");
+        newTr.append("<td><a href='/recipes?chef_id=" + chefData.id + "'>Go to Recipes</a></td>");
         newTr.append("<td><a href='/cms?chef_id=" + chefData.id + "'>Create a Recipe</a></td>");
         newTr.append("<td><a style='cursor:pointer;color:red' class='delete-chef'>Delete Chef</a></td>");
         return newTr;
@@ -65,7 +65,7 @@ $(document).ready(function() {
         chefList.children().not(":last").remove();
         chefContainer.children(".alert").remove();
         if (rows.length) {
-            console.log(rows);
+            // console.log(rows);
             chefList.prepend(rows);
         } else {
             renderEmpty();

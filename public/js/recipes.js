@@ -3,11 +3,11 @@ $(document).ready(function() {
 
     // recipesContainer holds all of our Recipes
     var recipesContainer = $(".recipes-container");
-    var recipeCategorySelect = $("#category");
+    // var recipeCategorySelect = $("#category");
     // Click events for the edit and delete buttons
     $(document).on("click", "button.delete", handleRecipeDelete);
     $(document).on("click", "button.edit", handleRecipeEdit);
-    $(document).on("click", "button.upvote", upvote);
+    $(document).on("click", "button.upVote", upVote);
     // Variable to hold our Recipes
     var recipes;
 
@@ -32,7 +32,7 @@ $(document).ready(function() {
             chefId = "/?chef_id=" + chefId;
         }
         $.get("/api/recipes" + chefId, function(data) {
-            console.log("Recipes", data);
+            // console.log("Recipes", data);
             recipes = data;
             if (!recipes || !recipes.length) {
                 displayEmpty(chef);
@@ -63,43 +63,48 @@ $(document).ready(function() {
         recipesContainer.append(recipesToAdd);
     }
 
+    var counter = 0;
+
+    function upVote() {
+        if (counter < 1099) {
+            counter++;
+            document.getElementById("clicks").innerHTML = " " + counter;
+        };
+    }
     // This function constructs a recipe's HTML
     function createNewRow(recipe) {
+        console.log(recipe.data);
         var formattedDate = new Date(recipe.createdAt);
         formattedDate = moment(formattedDate).format("MMMM Do YYYY, h:mm:ss a");
-
         var newRecipeCard = $("<div>");
         newRecipeCard.addClass("card");
-
         var newRecipeCardHeading = $("<div>");
         newRecipeCardHeading.addClass("card-header");
-
         var deleteBtn = $("<button>");
         deleteBtn.text("x");
         deleteBtn.addClass("delete btn btn-danger");
-
         var editBtn = $("<button>");
         editBtn.text("EDIT");
         editBtn.addClass("edit btn btn-info");
-
         var upVoteBtn = $("<button>");
-        upVoteBtn.text("Thumbs Up Vote");
-        upVoteBtn.addClass("upvote btn btn-info");
-
+        upVoteBtn.text("Up Vote");
+        upVoteBtn.addClass("upVote btn btn-info");
+        var clicks = $("<h5>");
+        clicks.prop("id", "clicks");
+        clicks.val(counter);
+        clicks.text(counter);
         var newRecipeTitle = $("<h2>");
         var newRecipeDate = $("<small>");
         var newRecipeChef = $("<h5>");
-
-        newRecipeChef.text("Written by: " + recipe.chef.name);
+        newRecipeChef.text("Written by: ");
+        // + Recipes.Chef.name
         newRecipeChef.css({
             float: "right",
             color: "green",
             "margin-top": "-10px"
         });
-
         var newRecipeCardBody = $("<div>");
         newRecipeCardBody.addClass("card-body");
-
         var newRecipeBody = $("<p>");
         var newRecipeCook = $("<p>");
         newRecipeTitle.text(recipe.title + " ");
@@ -109,14 +114,15 @@ $(document).ready(function() {
         newRecipeTitle.append(newRecipeDate);
         newRecipeCardHeading.append(deleteBtn);
         newRecipeCardHeading.append(editBtn);
+        newRecipeCardHeading.append(upVoteBtn);
         newRecipeCardHeading.append(newRecipeTitle);
         newRecipeCardHeading.append(newRecipeChef);
         newRecipeCardBody.append(newRecipeBody);
         newRecipeCardBody.append(newRecipeCook);
         newRecipeCard.append(newRecipeCardHeading);
         newRecipeCard.append(newRecipeCardBody);
+        newRecipeCard.append(clicks);
         newRecipeCard.data("recipe", recipe);
-
         return newRecipeCard;
     }
 
@@ -151,13 +157,6 @@ $(document).ready(function() {
         messageH2.html("No recipes yet" + partial + ", navigate <a href='/cms" + query +
             "'>here</a> in order to get started.");
         recipesContainer.append(messageH2);
-    }
-
-    function upvote() {
-        var counter = 0;
-        if (counter > 99) {
-            counter++;
-        };
     }
 
 });
