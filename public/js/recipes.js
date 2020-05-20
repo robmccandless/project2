@@ -4,10 +4,11 @@ $(document).ready(function() {
     // recipesContainer holds all of our Recipes
     var recipesContainer = $(".recipes-container");
     // var recipeCategorySelect = $("#category");
-    // Click events for the edit and delete buttons
+    var formComment = $("commentBody"); // Click events for the edit and delete buttons
     $(document).on("click", "button.delete", handleRecipeDelete);
     $(document).on("click", "button.edit", handleRecipeEdit);
     $(document).on("click", "button.upVote", upVote);
+    $(document).on("click", "button.submitComment ", submitComment);
     // Variable to hold our Recipes
     var recipes;
 
@@ -42,6 +43,22 @@ $(document).ready(function() {
         });
     }
 
+    function getComments(recipe) {
+        recipeId = recipe || "";
+        if (recipeId) {
+            recipeId = "/?recipe_id=" + recipeId;
+        }
+        $.get("/api/comment" + recipeId, function(data) {
+            // console.log("Recipes", data);
+            comment = data;
+            if (!comment || !comment.length) {
+                displayEmpty(comment);
+            } else {
+                initializeRows();
+            }
+        });
+    }
+
     // This function does an API call to delete recipes
     function deleteRecipe(id) {
         $.ajax({
@@ -50,6 +67,16 @@ $(document).ready(function() {
             })
             .then(function() {
                 getRecipes(recipeCategorySelect.val());
+            });
+    }
+
+    function submitForm(id) {
+        $.ajax({
+                method: "POST",
+                url: "/api/comment/" + id
+            })
+            .then(function() {
+                getComments(formComment.val());
             });
     }
 
@@ -141,6 +168,7 @@ $(document).ready(function() {
         newRecipeCard.append(formLabel);
         newRecipeCard.append(formTextArea);
         newRecipeCard.append(commentForm);
+        newRecipeCard.append(submitButton);
         return newRecipeCard;
     }
 
@@ -151,6 +179,14 @@ $(document).ready(function() {
             .parent()
             .data("recipe");
         deleteRecipe(currentRecipe.id);
+    }
+
+    function submitComment() {
+        var currentComment = $(this)
+            .parent()
+            .parent()
+            .data("comment");
+        submitForm(currentComment.id);
     }
 
     // This function figures out which Recipe we want to edit and takes it to the appropriate url

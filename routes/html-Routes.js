@@ -19,4 +19,8 @@ module.exports = function(app) {
     app.get("/chef-manager", function(req, res) {
         res.sendFile(path.join(__dirname, "../public/chef-manager.html"));
     });
+
+    app.get("/comment", function(req, res) {
+        res.sendFile(path.join(__dirname, "../public/recipes.html"));
+    });
 };
