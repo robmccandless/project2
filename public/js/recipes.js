@@ -116,6 +116,9 @@ $(document).ready(function() {
         var upVoteBtn = $("<button>");
         upVoteBtn.text("Up Vote");
         upVoteBtn.addClass("upVote btn btn-info");
+        var submitBtn = $("<button>");
+        submitBtn.text("Submit");
+        submitBtn.addClass("submitComment btn btn-info");
         var clicks = $("<h5>");
         clicks.prop("id", "clicks");
         clicks.val(counter);
@@ -162,13 +165,11 @@ $(document).ready(function() {
             "placeholder": "Love this recipe, comment here",
             "rows": "10"
         });
-        var submitButton = ("<button>");
-        submitButton.addClass("submit btn btn-submit");
         newRecipeCard.append(formBody);
         newRecipeCard.append(formLabel);
         newRecipeCard.append(formTextArea);
         newRecipeCard.append(commentForm);
-        newRecipeCard.append(submitButton);
+        newRecipeCard.append(submitBtn);
         return newRecipeCard;
     }
 
