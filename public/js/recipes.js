@@ -84,7 +84,7 @@ $(document).ready(function() {
 
         var upVoteBtn = $("<button>");
         upVoteBtn.text("Thumbs Up Vote");
-        upVoteBtn.addClass("upvote");
+        upVoteBtn.addClass("upvote btn btn-info");
 
         var newRecipeTitle = $("<h2>");
         var newRecipeDate = $("<small>");
