@@ -67,30 +67,39 @@ $(document).ready(function() {
     function createNewRow(recipe) {
         var formattedDate = new Date(recipe.createdAt);
         formattedDate = moment(formattedDate).format("MMMM Do YYYY, h:mm:ss a");
+
         var newRecipeCard = $("<div>");
         newRecipeCard.addClass("card");
+
         var newRecipeCardHeading = $("<div>");
         newRecipeCardHeading.addClass("card-header");
+
         var deleteBtn = $("<button>");
         deleteBtn.text("x");
         deleteBtn.addClass("delete btn btn-danger");
+
         var editBtn = $("<button>");
         editBtn.text("EDIT");
         editBtn.addClass("edit btn btn-info");
+
         var upVoteBtn = $("<button>");
         upVoteBtn.text("Thumbs Up Vote");
         upVoteBtn.addClass("upvote");
+
         var newRecipeTitle = $("<h2>");
         var newRecipeDate = $("<small>");
         var newRecipeChef = $("<h5>");
-        newRecipeChef.text("Written by: " + recipe.Chef.name);
+
+        newRecipeChef.text("Written by: " + recipe.chef.name);
         newRecipeChef.css({
             float: "right",
-            color: "blue",
+            color: "green",
             "margin-top": "-10px"
         });
+
         var newRecipeCardBody = $("<div>");
         newRecipeCardBody.addClass("card-body");
+
         var newRecipeBody = $("<p>");
         var newRecipeCook = $("<p>");
         newRecipeTitle.text(recipe.title + " ");
@@ -107,6 +116,7 @@ $(document).ready(function() {
         newRecipeCard.append(newRecipeCardHeading);
         newRecipeCard.append(newRecipeCardBody);
         newRecipeCard.data("recipe", recipe);
+
         return newRecipeCard;
     }
 
@@ -148,8 +158,6 @@ $(document).ready(function() {
         if (counter > 99) {
             counter++;
         };
-
     }
-
 
 });
