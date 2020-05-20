@@ -121,8 +121,26 @@ $(document).ready(function() {
         newRecipeCardBody.append(newRecipeCook);
         newRecipeCard.append(newRecipeCardHeading);
         newRecipeCard.append(newRecipeCardBody);
-        newRecipeCard.append(clicks);
+        newRecipeCardBody.append(clicks);
         newRecipeCard.data("recipe", recipe);
+        var commentForm = $("<div>");
+        commentForm.addClass("commentForm");
+        var formBody = $("<form>");
+        formBody.addClass("commentBody");
+        var formLabel = $("<label>");
+        formLabel.prop("for", "comment");
+        var formTextArea = $("<textarea>");
+        formTextArea.attr({
+            "class": "form-control",
+            "placeholder": "Love this recipe, comment here",
+            "rows": "10"
+        });
+        var submitButton = ("<button>");
+        submitButton.addClass("submit btn btn-submit");
+        newRecipeCard.append(formBody);
+        newRecipeCard.append(formLabel);
+        newRecipeCard.append(formTextArea);
+        newRecipeCard.append(commentForm);
         return newRecipeCard;
     }
 
